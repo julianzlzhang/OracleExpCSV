@@ -15,7 +15,7 @@ public class ColumnWrapperString extends ColumnWrapper {
 			text = text.replace("\"", "\"\"");
 		}
 		
-		if(text.contains("\"") || text.contains("^") || text.contains("\n")){
+		if(text.contains("\"") || text.contains("^") || text.contains("\n") || text.contains("\r")){
 			text = "\"" + text + "\"";
 		}
 		
