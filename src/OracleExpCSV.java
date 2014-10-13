@@ -39,6 +39,14 @@ public class OracleExpCSV {
 			manager.appendOneRow(writer, rset);
 			count++;
 		}
+		
+		rset.close();
+		stmt.close();
+		conn.close();
+		
+		writer.flush();
+		writer.close();
+		
 		long endTime = System.currentTimeMillis();
 		long elapsedTime = (endTime - beginTime)/1000;
 		System.out.println("Table " + args[3] + " exported " + count + " rows! "
