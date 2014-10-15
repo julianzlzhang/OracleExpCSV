@@ -23,16 +23,16 @@ public class OracleExpCSV {
 		String query = "select * from " + args[3];
 		String fileName = args[4];
 		
-		FileWriter writer = new FileWriter(fileName);
+		BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
 		
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 		Connection conn = DriverManager.getConnection(url, user, password);
+		conn.setReadOnly(true);
 		Statement stmt = conn.createStatement();
-		stmt.setFetchSize(1000000);
+		stmt.setFetchSize(10000);
 		ResultSet rset = stmt.executeQuery(query);
 		ResultSetMetaData metaData = rset.getMetaData();
 		MetaDataManager manager = new MetaDataManager(metaData);
-			
 		int count=0;
 		long beginTime = System.currentTimeMillis();
 		while (rset.next()) {

@@ -8,8 +8,8 @@ public class ColumnWrapperString extends ColumnWrapper {
 	}
 
 	@Override
-	public String getTextImpl(ResultSet rs) throws Exception {
-		String text = rs.getString(columnIndex);
+	public String getTextImpl(Object obj) throws Exception {
+		String text = (String) obj;
 		
 		if(text.contains("\"")){
 			text = text.replace("\"", "\"\"");

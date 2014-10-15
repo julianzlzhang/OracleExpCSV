@@ -1,7 +1,7 @@
 import java.sql.ResultSet;
 
 
-public abstract class ColumnWrapper {
+public class ColumnWrapper {
 
 	protected int columnIndex;
 	
@@ -10,12 +10,15 @@ public abstract class ColumnWrapper {
 	}
 	
 	public String getText(ResultSet rs) throws Exception{
-		if(rs.getObject(columnIndex) == null){
+		Object obj = rs.getObject(columnIndex); 
+		if(obj == null){
 			return "";
 		}else{
-			return getTextImpl(rs);
+			return getTextImpl(obj);
 		}
 	}
 	
-	public abstract String getTextImpl(ResultSet rs) throws Exception;
+	public String getTextImpl(Object obj) throws Exception{
+		return obj.toString();
+	}
 }

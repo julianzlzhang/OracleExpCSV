@@ -11,23 +11,24 @@ public class MetaDataManager {
 	private List<ColumnWrapper> columns;
 	
 	public MetaDataManager(ResultSetMetaData metaData) throws Exception{
-		columns = new ArrayList<ColumnWrapper>();
-		for(int i=1; i<= metaData.getColumnCount();i++){
+		int columnCount = metaData.getColumnCount();
+		columns = new ArrayList<ColumnWrapper>(columnCount);
+		for(int i=1; i<= columnCount;i++){
 			int columnType = metaData.getColumnType(i);
 			switch(columnType){
 			case Types.INTEGER:
 			case Types.BIGINT:
-				columns.add(new ColumnWrapperInt(i));
+				columns.add(new ColumnWrapper(i));
 				break;
 			case Types.TIMESTAMP:
-				columns.add(new ColumnWrapperTimestamp(i));
+				columns.add(new ColumnWrapper(i));
 				break;
 			case Types.VARCHAR:
 			case Types.CHAR:
 				columns.add(new ColumnWrapperString(i));
 				break;
 			case Types.NUMERIC:
-				columns.add(new ColumnWrapperNumeric(i));
+				columns.add(new ColumnWrapper(i));
 				break;
 			default:
 				throw new RuntimeException("UnHandled column type:" + columnType);
