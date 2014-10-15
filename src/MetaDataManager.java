@@ -43,9 +43,9 @@ public class MetaDataManager {
 		Iterator<ColumnWrapper> iter = columns.iterator();
 		while(iter.hasNext()){
 			wrapper = iter.next();
-			writer.append(wrapper.getText(rs));
+			buffer.append(wrapper.getText(rs));
 			if(iter.hasNext()){
-				writer.append('^');
+				buffer.append('^');
 			}
 		}
 		buffer.append('\n');
