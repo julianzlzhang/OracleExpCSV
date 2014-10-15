@@ -35,10 +35,19 @@ public class OracleExpCSV {
 		MetaDataManager manager = new MetaDataManager(metaData);
 		int count=0;
 		long beginTime = System.currentTimeMillis();
+		
+		StringBuilder buffer = new StringBuilder(1000000);
 		while (rset.next()) {
-			manager.appendOneRow(writer, rset);
 			count++;
+			manager.appendOneRow(buffer, rset);
+			if(count%100 == 0)
+			{
+				writer.append(buffer);
+				buffer.setLength(0);
+			}
 		}
+		writer.append(buffer);
+		buffer.setLength(0);
 		
 		rset.close();
 		stmt.close();

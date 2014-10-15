@@ -38,7 +38,7 @@ public class MetaDataManager {
 		
 	}
 
-	public void appendOneRow(Writer writer, ResultSet rs) throws Exception{
+	public void appendOneRow(StringBuilder buffer, ResultSet rs) throws Exception{
 		ColumnWrapper wrapper;
 		Iterator<ColumnWrapper> iter = columns.iterator();
 		while(iter.hasNext()){
@@ -48,6 +48,6 @@ public class MetaDataManager {
 				writer.append('^');
 			}
 		}
-		writer.append('\n');
+		buffer.append('\n');
 	}
 }
